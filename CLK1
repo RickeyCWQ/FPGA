@@ -1,0 +1,53 @@
+LIBRARY IEEE;
+USE IEEE.STD_LOGIC_1164.ALL;
+USE IEEE.STD_LOGIC_unsigned.ALL;
+
+ENTITY CLK1 IS
+PORT ( EN,SUC,CLKIN,SW:IN STD_LOGIC;
+       CLK_OUT1 : OUT STD_LOGIC);
+END ENTITY CLK1;
+      
+ARCHITECTURE BEHAV OF CLK1 IS
+SIGNAL CLK: STD_LOGIC;
+
+
+BEGIN 
+
+PROCESS(clkin)
+
+VARIABLE TEMP1: INTEGER range  24999999 DOWNTO 0:=0;
+VARIABLE TEMP2: INTEGER range  12499 DOWNTO 0:=0;
+BEGIN
+IF EN='1' THEN
+			
+		IF SUC='0' THEN
+		
+		IF CLKIN'EVENT AND CLKIN='1' THEN
+if SW='0' then
+   
+        IF temp1=24999999 THEN
+						temp1:=0;CLK<=NOT CLK;
+				ELSE 
+					temp1:=temp1+1;
+				END IF;
+			
+			
+elsif sw='1'then			
+		
+	   IF temp2=12499 THEN
+						temp2:=0;CLK<=NOT CLK;
+				ELSE 
+					temp2:=temp2+1;
+				END IF;
+			
+			end if;
+			end if;
+		
+		ELSIF SUC='1'THEN 
+			CLK<='0';
+			end if;
+			end if;
+		END PROCESS;
+CLK_OUT1<=CLK;
+END behav;
+
